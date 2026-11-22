@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "notebooks" / "astana_housing_endterm.ipynb"
+OUT = ROOT / "notebooks" / "astana_housing_ final.ipynb"
 
 
 def md(source):
@@ -19,11 +19,16 @@ def code(source):
 
 
 cells = [
-md("""# Astana Apartment Price Prediction — Endterm Project
+md("""# Predicting Apartment Asking Prices in Astana — Final Exam Project
 
 **Course:** Machine Learning Algorithms  
 **Group:** SE-2431  
 **Team:** Nurkhan Kuanyshov and Bakytzhan Jangazy
+
+**Contribution record.** Nurkhan Kuanyshov: data preparation, EDA, feature
+engineering, leakage-safe preprocessing, baseline models and K-Means. Bakytzhan
+Jangazy: ensemble tuning, PCA, ANN, final evaluation and error analysis. Both
+members review and can explain the complete workflow.
 
 ## 1. Problem statement and research objective
 
@@ -31,7 +36,22 @@ Astana apartment asking prices vary with size, layout, location, floor, building
 
 This is a regression task. The original target remains `price`; models learn `log1p(price)` because prices are right-skewed. Success is assessed using log-scale RMSE, MAE and R², plus KZT MAE and median absolute percentage error (MedAPE) on the original price scale. The test partition is reserved for one final evaluation only.
 
-This endterm notebook extends—not replaces—the preserved midterm notebook. All metrics and charts below are computed from the supplied Kaggle CSV; no historical midterm metric is copied into the results.
+This final-exam notebook extends—not replaces—the preserved midterm notebook.
+All metrics and charts below are computed from the supplied Kaggle CSV; no
+historical midterm metric is copied into the results.
+
+## Related work and research context
+
+Housing-price prediction combines hedonic characteristics with flexible
+statistical learning. Random Forest has been used for mass appraisal (Antipov &
+Pokryshevskaya, 2012), while Gradient Boosting is a well-established nonlinear
+regression method (Friedman, 2001). Recent work cautions that neural networks do
+not automatically outperform tree ensembles on medium-sized tabular data
+(Gorishniy et al., 2021; Grinsztajn et al., 2022). Accordingly, this project
+compares interpretable baselines, tree models and a feedforward ANN under one
+leakage-safe evaluation protocol. The target is an advertised asking price, not a
+verified transaction value; predictions are associations for decision support,
+not causal effects or official appraisals.
 """),
 code("""import importlib.util
 import platform
@@ -498,6 +518,55 @@ conclusion = f"""## 13. Evidence-based final conclusions
 **Remaining limitations.** These results estimate advertised—not transaction—prices and may be less reliable for premium listings, districts or features with sparse/noisy records. Future work should use verified sales, richer quality/renovation data and time-aware validation."""
 display(Markdown(conclusion))
 '''),
+md("""## 14. Research proposal: temporal and district robustness
+
+The completed analysis is cross-sectional: a random split estimates performance
+on listings drawn from the same collection, but cannot establish whether the
+model remains accurate after market conditions or listing composition change.
+The proposed follow-up keeps the same Astana theme and real-world source and
+asks: **does a model trained on earlier listings remain accurate on later
+listings, and how do errors vary across districts and price bands?**
+
+The proposed study will obtain at least three documented, chronologically
+distinct public dataset snapshots only where source and platform terms permit.
+It will harmonize fields, keep repeated advertisements within the same evaluation
+group, tune models with rolling-origin cross-validation, select a model before
+opening the newest test period, and report RMSE(log), MAE(log), R2, KZT MAE and
+MedAPE with bootstrap intervals for sufficiently represented groups. The
+hypotheses are: (H1) random-split evaluation is optimistic relative to a later
+period; (H2) error differs by district and price segment; and (H3) tree ensembles
+remain competitive with the ANN. These are proposed tests—not findings of the
+current dataset.
+
+This proposal responds to evidence that spatio-temporal dependence can matter in
+housing-price prediction (Soltani et al., 2022) and that model ranking depends
+on data and evaluation design (Grinsztajn et al., 2022). It will not fabricate
+historical data or claim temporal generalization if dated source snapshots cannot
+be obtained. Outputs will be aggregate results only: no contact details, exact
+addresses or identifiable listing records will be published.
+"""),
+md("""## References
+
+- Antipov, E. A., & Pokryshevskaya, E. B. (2012). Mass appraisal of residential apartments: An application of random forest for valuation. *Expert Systems with Applications, 39*(2), 1772–1778. https://doi.org/10.1016/j.eswa.2011.08.077
+- Bergstra, J., & Bengio, Y. (2012). Random search for hyper-parameter optimization. *Journal of Machine Learning Research, 13*, 281–305.
+- Breiman, L. (2001). Random forests. *Machine Learning, 45*, 5–32. https://doi.org/10.1023/A:1010933404324
+- Friedman, J. H. (2001). Greedy function approximation: A gradient boosting machine. *The Annals of Statistics, 29*(5), 1189–1232. https://doi.org/10.1214/aos/1013203451
+- Gorishniy, Y., Rubachev, I., Khrulkov, V., & Babenko, A. (2021). Revisiting deep learning models for tabular data. *Advances in Neural Information Processing Systems, 34*, 18932–18943.
+- Grinsztajn, L., Oyallon, E., & Varoquaux, G. (2022). Why do tree-based models still outperform deep learning on typical tabular data? *Advances in Neural Information Processing Systems, 35*, 507–520.
+- Jolliffe, I. T., & Cadima, J. (2016). Principal component analysis: A review and recent developments. *Philosophical Transactions of the Royal Society A, 374*(2065), 20150202. https://doi.org/10.1098/rsta.2015.0202
+- Kaggle. (n.d.). *Astana real estate dataset* [Data set]. https://www.kaggle.com/datasets/turarr/astana-real-estate-dataset
+- Kingma, D. P., & Ba, J. (2015). Adam: A method for stochastic optimization. *International Conference on Learning Representations.* https://arxiv.org/abs/1412.6980
+- MacQueen, J. (1967). Some methods for classification and analysis of multivariate observations. In *Proceedings of the Fifth Berkeley Symposium on Mathematical Statistics and Probability* (pp. 281–297).
+- Pedregosa, F., Varoquaux, G., Gramfort, A., et al. (2011). Scikit-learn: Machine learning in Python. *Journal of Machine Learning Research, 12*, 2825–2830.
+- Rousseeuw, P. J. (1987). Silhouettes: A graphical aid to the interpretation and validation of cluster analysis. *Journal of Computational and Applied Mathematics, 20*, 53–65. https://doi.org/10.1016/0377-0427(87)90125-7
+- Soltani, A., Heydari, M., Aghaei, F., & Pettit, C. (2022). Housing price prediction incorporating spatio-temporal dependency into machine learning algorithms. *Cities, 131*, 103941. https://doi.org/10.1016/j.cities.2022.103941
+
+## AI-use disclosure
+
+Generative AI was used as writing and coding assistance while preparing project
+materials. The team checked the final code, sources, metrics and claims and is
+responsible for explaining all results during the defense.
+"""),
 ]
 
 notebook = {"cells": cells, "metadata": {"kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"}, "language_info": {"name": "python", "version": "3"}}, "nbformat": 4, "nbformat_minor": 5}

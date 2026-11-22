@@ -6,7 +6,7 @@ from nbclient import NotebookClient
 
 
 ROOT = Path(__file__).resolve().parents[1]
-NOTEBOOK = ROOT / "notebooks" / "astana_housing_endterm.ipynb"
+NOTEBOOK = ROOT / "notebooks" / "astana_housing_ final.ipynb"
 
 notebook = nbformat.read(NOTEBOOK, as_version=4)
 nbformat.validate(notebook)

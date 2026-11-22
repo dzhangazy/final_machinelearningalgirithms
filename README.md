@@ -28,7 +28,7 @@ The dataset downloads automatically from Kaggle when the notebook runs. A local 
 
 ```text
 astana_housing_midterm.ipynb              # preserved original work
-notebooks/astana_housing_endterm.ipynb    # endterm notebook
+notebooks/astana_housing_ final.ipynb     # final-exam notebook
 scripts/build_endterm_notebook.py         # version-controlled notebook source
 visualizations/{eda,clustering,pca,ann,evaluation}/
 models/                                   # created by a successful run
