@@ -222,8 +222,5 @@ these predictions as official appraisals, credit decisions, or eligibility
 decisions; verify upstream data terms and avoid publishing identifiable
 listing details.
 
-Generative AI assisted with code and documentation editing, literature/source
-checking, and preparation of report and presentation materials. The team is
-responsible for checking sources, citations, code, results, and claims and
-must be able to explain and defend the complete project.
+
 >>>>>>> 795e882 (updated README)
